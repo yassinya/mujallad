@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block header %}
-{% for bookpage in bookpages if bookpage[2] == pagenumber %}
+{% for bookpage in bookpages if bookpage[3] == pagenumber %}
  <title>{{ websiteName }} - {{ pagenumber }} - {{ bookpage[0] }}</title>
  <meta name="description" content="{{bookpage[1] | striptags | truncate(170)}}"/>
  {% endfor %}
@@ -9,8 +9,8 @@
 
 {% block content %}
 
- {% for bookpage in bookpages if bookpage[2] == pagenumber %}
- {{bookpage[1] | safe}}
+ {% for bookpage in bookpages if bookpage[3] == pagenumber %}
+ {{bookpage[2] | safe}}
  {% endfor %}
- 
+ <script src="../static/scripts.js"></script>
 {% endblock %}

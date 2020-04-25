@@ -22,15 +22,21 @@ def readdocs():
   docsfiles = sorted(docsfiles)
   
   regexExtractTitle = re.compile("^#[^#\n]+")
+  regexExtractSubHeading = re.compile("##[^#\n]+")
   bookpages = []
   
   for doc in docsfiles:
     currentdoc = open(doc, 'r')
     content = currentdoc.read()
     pagetitle = regexExtractTitle.findall(content)[0].split("# ")[1]
+    pagesubheadings = []
+    subheadings = regexExtractSubHeading.findall(content)
+    if len(subheadings) > 0:
+      for subheading in subheadings:
+        pagesubheadings.append(subheading.split("## ")[1])
     pagehtml = markdown.markdown(text=content, extensions=['tables'])
     pagenumber = docsfiles.index(doc)+1
-    bookpages.append([pagetitle, str(pagehtml), pagenumber])
+    bookpages.append([pagetitle, pagesubheadings, str(pagehtml), pagenumber])
       
   return bookpages
 

@@ -35,7 +35,10 @@
       
       <ul>
         {% for bookpage in bookpages %}
-        <a href="{{ websiteUrl }}/bookpage/{{bookpage[2]}}"><li> {{ bookpage[0] }}</li></a>
+        <a href="{{ websiteUrl }}/bookpage/{{bookpage[3]}}"><li> <strong>{{ bookpage[0] }}</strong></li></a>
+          {% for subheading in bookpage[1] %}
+            <a href="{{ websiteUrl }}/bookpage/{{bookpage[3]}}#section-{{loop.index}}"><li class="subheading">{{ subheading }}</li></a>
+          {% endfor %}
         {% endfor %}
       </ul>
       
